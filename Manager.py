@@ -197,7 +197,7 @@ class Manager:
         self.window.deiconify()
 
     def new_window(self, title, button_info):
-        """Create a new window with specific buttons"""
+        
         new_win = tk.Toplevel(self.window)
         new_win.title(title)
 

@@ -36,7 +36,7 @@ class Inventory:
         Inventory.inventorylst[-1].save_inventory_to_file()
     
     def findInventory(name):
-        """Find a recipe by name."""
+        
         output = []
         for item in Inventory.inventorylst:
             if item.itemName == name:

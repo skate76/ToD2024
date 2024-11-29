@@ -37,7 +37,7 @@ class Recipe:
 
     @staticmethod
     def displayAll():
-        """Display all recipes."""
+        
         recipes = ""
         for recipe in Recipe.recipelst:
             recipes += f"Recipe Name: {recipe.recipeName}\n"
@@ -48,7 +48,7 @@ class Recipe:
 
     @classmethod
     def load_recipe(cls):
-        """Load recipes from file."""
+        
         try:
             with open("Recipe.txt", "r") as file:
                 for line in file:
@@ -66,7 +66,7 @@ class Recipe:
 
     @classmethod
     def save_recipe(cls):
-        """Save all recipes to a file."""
+        
         with open("Recipe.txt", "w") as file:
             for recipe in cls.recipelst:
                 ingredients_str = ";".join([f"{ingredient},{quantity}" for ingredient, quantity in recipe.ingredients])
@@ -74,7 +74,7 @@ class Recipe:
 
     @classmethod
     def recipe_initialization(cls):
-        """Initialize default recipes if no file is found."""
+        
         Recipe("Cupcakes", [("Milk", 2), ("Eggs", 3), ("Butter", 4)])
         Recipe("Chocolate Cake", [("Flour", 2), ("Cocoa Powder", 1), ("Sugar", 1), ("Eggs", 2)])
 
@@ -96,7 +96,7 @@ class RecipeApp:
         self.result_text.grid(row=4, column=0, columnspan=2, padx=10, pady=10)
 
     def open_add_recipe_window(self):
-        """Open a new window to add a recipe."""
+        
         add_window = tk.Toplevel(self.root)
         add_window.title("Add New Recipe")
 
@@ -111,7 +111,7 @@ class RecipeApp:
         ingredients_entry.grid(row=1, column=1, padx=10, pady=5)
 
         def add_recipe_to_db():
-            """Add the new recipe to the database."""
+            
             name = recipe_name_entry.get()
             ingredients_str = ingredients_entry.get()
 
@@ -147,7 +147,7 @@ class RecipeApp:
         add_recipe_button.grid(row=2, column=0, columnspan=2, pady=10)
 
     def open_find_recipe_window(self):
-        """Open a new window to find a recipe."""
+        
         find_window = tk.Toplevel(self.root)
         find_window.title("Find Recipe")
 
@@ -157,7 +157,7 @@ class RecipeApp:
         recipe_name_entry.grid(row=0, column=1, padx=10, pady=5)
 
         def find_recipe_in_db():
-            """Search for the recipe by name and display ingredients."""
+            
             name = recipe_name_entry.get()
             if not name:
                 messagebox.showerror("Error", "Please enter a recipe name to search!")
@@ -179,7 +179,7 @@ class RecipeApp:
         result_text.grid(row=2, column=0, columnspan=2, padx=10, pady=10)
 
     def display_all_recipes(self):
-        """Display all recipes."""
+        
         all_recipes = Recipe.displayAll()
         self.result_text.delete(1.0, tk.END)  
         self.result_text.insert(tk.END, all_recipes)
