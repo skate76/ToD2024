@@ -1,3 +1,4 @@
+#This project acknowledges the use of LLM to assist in the creation of the GUI
 import getpass
 import os
 import tkinter as tk

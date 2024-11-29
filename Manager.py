@@ -1,3 +1,4 @@
+#This project acknowledges the use of LLM to assist in the creation of the GUI
 import tkinter as tk
 from tkinter import messagebox
 from Employee import EmployeeApp
@@ -17,20 +18,19 @@ class Manager:
         self.window = tk.Tk()
         self.window.title("Manager Dashboard")
         
-        #buttons!
+        
         self.create_buttons()
 
     def create_buttons(self):
-        #button definitions
-        # Add/Update Inventory Button
+        
         self.inventory_button = tk.Button(self.window, text="Add/Update Inventory", command=self.inventory_mgmt)
         self.inventory_button.pack(pady=10)
 
-        # Generate Reports Button
+        
         self.reports_button = tk.Button(self.window, text="Generate Reports", command=self.generate_reports)
         self.reports_button.pack(pady=10)
 
-        # Manage Staff Button
+        
         self.manage_staff_button = tk.Button(self.window, text="Manage Staff", command=self.manage_staff)
         self.manage_staff_button.pack(pady=10)
 
@@ -43,7 +43,7 @@ class Manager:
         self.exit_button.pack(pady=10)
 
     def inventory_mgmt(self):
-        #Opens inventory management window
+      
         self.new_window("Inventory Management", [
             ("Display Inventory", self.display_inventory),
             ("Add New Inventory", self.add_inventory),
@@ -51,10 +51,7 @@ class Manager:
             ("Back", self.close_window)
         ])
 
-    #def display_inventory(self):
-        #inventory_info = "\n".join([f"Item: {item.itemName}, Quantity: {item.itemQnty}" for item in Inventory.inventorylst])
-        #messagebox.showinfo("Inventory", f"Current Inventory:\n{inventory_info}")
-
+    
     def display_inventory(self):
         for item in Inventory.inventorylst:
             inventory_info = f"Item: {item.itemName}, Quantity: {item.itemQnty}" 

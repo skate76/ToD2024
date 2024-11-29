@@ -1,3 +1,4 @@
+#This project acknowledges the use of LLM to assist in the creation of the GUI
 import tkinter as tk
 from tkinter import messagebox
 from Employee import Employee
@@ -89,7 +90,7 @@ class Owner:
                     f"\n"
                     f"\n"
                 )
-        messagebox.showinfo("Payroll generated successfully!", orderlist)
+        messagebox.showinfo("Order Report generated successfully!", orderlist)
 
     def manage_staff(self):
         Employee.load_employees()
@@ -119,7 +120,7 @@ class Owner:
                     f"\n"
                     f"\n"
                 )
-        messagebox.showinfo("Payroll generated successfully!", orderlist)
+        messagebox.showinfo("Order Report generated successfully!", orderlist)
 
     def orderstatus(self):
         if self.orderlst:

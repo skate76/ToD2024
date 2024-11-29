@@ -1,3 +1,4 @@
+#This project acknowledges the use of LLM to assist in the creation of the GUI
 import tkinter as tk
 from tkinter import messagebox
 
@@ -180,12 +181,12 @@ class RecipeApp:
     def display_all_recipes(self):
         """Display all recipes."""
         all_recipes = Recipe.displayAll()
-        self.result_text.delete(1.0, tk.END)  # Clear previous results
+        self.result_text.delete(1.0, tk.END)  
         self.result_text.insert(tk.END, all_recipes)
 
 # Main GUI window setup
 if __name__ == "__main__":
-    Recipe.load_recipe()  # Load recipes from the file at the start
+    Recipe.load_recipe()  
     root = tk.Tk()
     app = RecipeApp(root)
     root.mainloop()

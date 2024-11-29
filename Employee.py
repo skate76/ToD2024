@@ -1,8 +1,9 @@
+#This project acknowledges the use of LLM to assist in the creation of the GUI
 import datetime
 import tkinter as tk
 from tkinter import messagebox
 from Order import OrderApp
-from tkinter.scrolledtext import ScrolledText  # Import ScrolledText widget
+from tkinter.scrolledtext import ScrolledText  
 
 class Employee:
     employee_list = []
