@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox
 from Employee import EmployeeApp
-#from Employee import EmployeeMng
+from Recipe import Recipe
 from Recipe import RecipeApp
 from Employee import Employee
 from Inventory import Inventory
@@ -108,6 +108,7 @@ class Manager:
         #messagebox.showinfo("Success", f"Item '{item_name}' removed successfully!")
 
     def manage_recipe(self):
+        Recipe.load_recipe()
         root= tk.Tk()
         RecipeApp(root)
 

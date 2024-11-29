@@ -3,6 +3,7 @@ from tkinter import messagebox
 from Employee import Employee
 from Inventory import Inventory
 from Manager import Manager
+from Recipe import RecipeApp
 from Recipe import Recipe
 import tkinter.simpledialog as simpledialog
 
@@ -20,7 +21,7 @@ class Owner:
     def create_buttons(self):
         #button definitions
         # Add/Update Inventory Button
-        self.inventory_button = tk.Button(self.window, text="Add/Update Inventory", command=Manager.inventory_mgmt)
+        self.inventory_button = tk.Button(self.window, text="Add/Update Inventory", command=self.inventory_mgmt)
         self.inventory_button.pack(pady=10)
 
         # Generate Payroll Button
@@ -28,8 +29,8 @@ class Owner:
         self.payroll_button.pack(pady=10)
 
         # Manage Recipe Button
-       # self.recipes_button = tk.Button(self.window, text="Manage Recipes", command=self.manageRecipe)
-      #  self.recipes_button.pack(pady=10)
+        self.recipes_button = tk.Button(self.window, text="Manage Recipes", command=self.manageRecipe)
+        self.recipes_button.pack(pady=10)
 
         # Manage Orders Button
       #  self.orders_button = tk.Button(self.window, text="Manage Orders", command=self.manageOrders)
@@ -42,6 +43,56 @@ class Owner:
         # Exit Button
         self.exit_button = tk.Button(self.window, text="Exit", command=self.window.quit)
         self.exit_button.pack(pady=10)
+    
+    def inventory_mgmt(self):
+        #Opens inventory management window
+        self.new_window("Inventory Management", [
+            ("Display Inventory", self.display_inventory),
+            ("Add New Inventory", self.add_inventory),
+            ("Update Inventory", self.update_inventory),
+            ("Back", self.close_window)
+        ])
+
+    #def display_inventory(self):
+        #inventory_info = "\n".join([f"Item: {item.itemName}, Quantity: {item.itemQnty}" for item in Inventory.inventorylst])
+        #messagebox.showinfo("Inventory", f"Current Inventory:\n{inventory_info}")
+
+    def display_inventory(self):
+        for item in Inventory.inventorylst:
+            inventory_info = f"Item: {item.itemName}, Quantity: {item.itemQnty}" 
+            messagebox.showinfo("Inventory", f"Current Inventory:\n{inventory_info}")
+            break
+
+    def add_inventory(self):
+        item_name = self.ask_input("Enter item name: ")
+        if item_name is None:
+            return  
+        
+        item_qnty = self.ask_input("Enter quantity: ", int)
+        if item_qnty is None:
+            return  
+        
+        Inventory.addInventory(item_name, item_qnty)
+        messagebox.showinfo("Success", f"Item '{item_name}' added successfully!")
+
+    def update_inventory(self):
+        item_name = self.ask_input("Enter item name to update: ")
+        if item_name is None:
+            return  
+    
+        #find
+        item = Inventory.findInventory(item_name)
+        if item is None:
+            messagebox.showerror("Error", "Item Not Found.")
+            return
+
+        #new quant
+        new_qnty = self.ask_input(f"Enter new quantity for {item_name}: ", int)
+        if new_qnty is None:
+            return  
+    
+        Inventory.update_inventory(item_name,new_qnty)
+        messagebox.showinfo("Success", f"Quantity for '{item_name}' updated to {new_qnty}.")
 
 
     def generatePayroll(self):
@@ -83,11 +134,10 @@ class Owner:
 
 
     def manageRecipe(self):
-    #Opens inventory management window
-        self.new_window("Recipe Manager", [
-            ("Adjust recipes", self.recpManage),
-            ("Back", self.close_window)
-        ])
+        Recipe.load_recipe()
+        root= tk.Tk()
+        RecipeApp(root)
+    
 
     def recpManage(self):
         return 0
