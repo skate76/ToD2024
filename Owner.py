@@ -1,10 +1,9 @@
 import tkinter as tk
 from tkinter import messagebox
 from Employee import Employee
-
 from Inventory import Inventory
 from Manager import Manager
-from Recipe import RecipeApp
+from Recipe import Recipe
 import tkinter.simpledialog as simpledialog
 
 class Owner:
@@ -21,7 +20,7 @@ class Owner:
     def create_buttons(self):
         #button definitions
         # Add/Update Inventory Button
-        self.inventory_button = tk.Button(self.window, text="Add/Update Inventory", command=self.inventory_mgmt)
+        self.inventory_button = tk.Button(self.window, text="Add/Update Inventory", command=Manager.inventory_mgmt)
         self.inventory_button.pack(pady=10)
 
         # Generate Payroll Button
@@ -48,7 +47,8 @@ class Owner:
     def generatePayroll(self):
     #Opens inventory management window
         self.new_window("Payroll Generator", [
-            ("Generate Employee Payroll", self.genProll),
+            ("Generate General Payroll", self.genProll),
+            ("Generate Employee Payroll", self.specificPayroll),
             ("Back", self.close_window)
         ])
 
@@ -64,107 +64,24 @@ class Owner:
                     f"\n"
                     f"\n"
                 )
-        messagebox.showinfo("Payroll generated successfully!", paylist)
-        
-    def inventory_mgmt(self):
-        #Opens inventory management window
-        self.new_window("Inventory Management", [
-            ("Display Inventory", self.display_inventory),
-            ("Add New Inventory", self.add_inventory),
-            ("Update Inventory", self.update_inventory),
-            ("Back", self.close_window)
-        ])
+        messagebox.showinfo("General Payroll generated successfully!", paylist)
 
-    #def display_inventory(self):
-        #inventory_info = "\n".join([f"Item: {item.itemName}, Quantity: {item.itemQnty}" for item in Inventory.inventorylst])
-        #messagebox.showinfo("Inventory", f"Current Inventory:\n{inventory_info}")
+    def specificPayroll(self):
+        if self.employee_list:
+            paylist = ""
+            id = int(self.ask_input("Enter Employee ID to search: "))
+            for e in self.employee_list:
+                if id == e.employee_id:
+                    paylist += (
+                        f"ID: {e.employee_id}\n"
+                        f"Name: {e.employee_name}\n"
+                        f"Position: {e.position}\n"
+                        f"Pay: {e.payrate*e.hours_worked}\n"
+                        f"\n"
+                    )
+        messagebox.showinfo("Employee Payroll generated successfully!", paylist)
 
-    def display_inventory(self):
-        for item in Inventory.inventorylst:
-            inventory_info = f"Item: {item.itemName}, Quantity: {item.itemQnty}" 
-            messagebox.showinfo("Inventory", f"Current Inventory:\n{inventory_info}")
-            break
 
-    def add_inventory(self):
-        item_name = self.ask_input("Enter item name: ")
-        if item_name is None:
-            return  
-        
-        item_qnty = self.ask_input("Enter quantity: ", int)
-        if item_qnty is None:
-            return  
-        
-        Inventory.addInventory(item_name, item_qnty)
-        messagebox.showinfo("Success", f"Item '{item_name}' added successfully!")
-
-    def update_inventory(self):
-        item_name = self.ask_input("Enter item name to update: ")
-        if item_name is None:
-            return  
-    
-        #find
-        item = Inventory.findInventory(item_name)
-        if item is None:
-            messagebox.showerror("Error", "Item Not Found.")
-            return
-
-        #new quant
-        new_qnty = self.ask_input(f"Enter new quantity for {item_name}: ", int)
-        if new_qnty is None:
-            return  
-    
-        Inventory.update_inventory(item_name,new_qnty)
-        messagebox.showinfo("Success", f"Quantity for '{item_name}' updated to {new_qnty}.")
-
-    #Inventory.load_inventory_from_file()
-
-    #def display_inventory(self):
-        #inventory_info = "\n".join([f"Item: {item.itemName}, Quantity: {item.itemQnty}" for item in Inventory.inventorylst])
-        #messagebox.showinfo("Inventory", f"Current Inventory:\n{inventory_info}")
-
-    
-    def display_inventory(self):
-        if not Inventory.inventorylst:
-            messagebox.showinfo("Inventory", f"No items are registered")
-            return
-        
-        inventory_info = "\n".join([f"Item: {item.itemName}, Quantity: {item.itemQnty}" for item in Inventory.inventorylst])
-        messagebox.showinfo("Inventory", f"Current Inventory:\n{inventory_info}")
-        pass
-            
-
-    def add_inventory(self):
-        item_name = self.ask_input("Enter item name: ")
-        if item_name is None:
-            return  
-        
-        item_qnty = self.ask_input("Enter quantity: ", int)
-        if item_qnty is None:
-            return  
-        
-        Inventory.addInventory(item_name, item_qnty)
-        messagebox.showinfo("Success", f"Item '{item_name}' added successfully!")
-
-    
-    def update_inventory(self):
-        item_name = self.ask_input("Enter item name to update: ")
-        if item_name is None:
-            return  
-    
-        #find
-        item = Inventory.findInventory(item_name)
-        if item is None:
-            messagebox.showerror("Error", "Item Not Found.")
-            return
-
-        #new quant
-        new_qnty = self.ask_input(f"Enter new quantity for {item_name}: ", int)
-        if new_qnty is None:
-            return  
-    
-        Inventory.update_inventory(item_name,new_qnty)
-        messagebox.showinfo("Success", f"Quantity for '{item_name}' updated to {new_qnty}.")
-        
     def manageRecipe(self):
     #Opens inventory management window
         self.new_window("Recipe Manager", [
