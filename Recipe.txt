@@ -1,0 +1,3 @@
+blank: milk,2;water,3
+polymouth: trix,2;flour,5
+cakes: flour,5;milk,2;sugar,3

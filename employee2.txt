@@ -1,0 +1,6 @@
+ID: 1, Name: Justin Moo, Position: Manager, Username: employee1, Password: password1, Phone: 123-456-7890, Email: justin@example.com, Pay Rate: 20.0, Status: Active, Hours Worked: 0
+ID: 2, Name: Katelyn Tait, Position: Cashier, Username: employee2, Password: password2, Phone: 123-456-7891, Email: katelyn@example.com, Pay Rate: 5.0, Status: Active, Hours Worked: 0
+ID: 3, Name: Nasya Burrell, Position: Cashier, Username: employee3, Password: password3, Phone: 123-456-7891, Email: nasya@example.com, Pay Rate: 20.0, Status: Active, Hours Worked: 0
+ID: 4, Name: Tishawn Whyte, Position: Cashier, Username: employee4, Password: password4, Phone: 123-456-7891, Email: tishawn@example.com, Pay Rate: 20.0, Status: Active, Hours Worked: 0
+ID: 5, Name: Johnathon Bennet, Position: Cashier, Username: employee5, Password: password5, Phone: 123-456-7892, Email: johnathon@example.com, Pay Rate: 20.0, Status: Active, Hours Worked: 0
+ID: 6, Name: Dominic Adams, Position: Cashier, Username: employee6, Password: password6, Phone: 123-456-7893, Email: dominic@example.com, Pay Rate: 20.0, Status: Active, Hours Worked: 0
