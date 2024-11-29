@@ -2,6 +2,7 @@ import getpass
 import os
 import tkinter as tk
 from Employee import EmployeeApp
+from Employee import Employee
 from Recipe import RecipeApp
 from Manager import Manager
 from Owner import Owner
@@ -241,8 +242,8 @@ def Login():
             login_window.destroy()
             root = tk.Tk()
 
-            print("1")
             
+            Employee.load_employees()
             app = EmployeeApp(root)
             root.mainloop()
 

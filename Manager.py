@@ -14,8 +14,8 @@ class Manager:
         self.inventory = Inventory.inventorylst
         self.employee_list = Employee.employee_list
         
-        #self.window = tk.Tk()
-        #self.window.title("Manager Dashboard")
+        self.window = tk.Tk()
+        self.window.title("Manager Dashboard")
         
         #buttons!
         self.create_buttons()
@@ -107,11 +107,7 @@ class Manager:
         #self.inventory.remove(item_name)
         #messagebox.showinfo("Success", f"Item '{item_name}' removed successfully!")
 
-    def manage_recipe(self):
-        Recipe.load_recipe()
-        root= tk.Tk()
-        RecipeApp(root)
-
+    
     def generate_reports(self):
         # Repo logic
         messagebox.showinfo("Reports", "Reports generated successfully!")
