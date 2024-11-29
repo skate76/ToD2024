@@ -116,6 +116,8 @@ class Manager:
         messagebox.showinfo("Reports", "Reports generated successfully!")
 
     def manage_staff(self):
+        Employee.load_employees()
+        
         root = tk.Tk()
         EmployeeApp(root)
         # Staff management window
