@@ -1,3 +1,4 @@
+#This project acknowledges the use of LLM to assist in the creation of the GUI
 from Recipe import Recipe
 from Inventory import Inventory
 import random
@@ -15,7 +16,7 @@ class Order:
     def __init__(self, custName, custPNum,dessert):
         self.name = custName
         self.phone = custPNum
-        self.item = dessert #from recipe classNEED TO MAKE RECIPE CLASS
+        self.item = dessert #from recipe class
         self.orderDetails = Recipe.findRecipe(dessert)
         #self.allergy = allergy # should be serperated my commas; if none then NONE would be writen down instead 
         self.status = "Pending" # This is always the default status when a order is made
@@ -57,7 +58,7 @@ class Order:
                 for line in file:
                     details = line.strip().split(", ")
 
-                    if len(details) >= 4:  # Ensure valid order data with 4 fields (including status)
+                    if len(details) >= 4:  
                         custName = details[0].split(": ")[1]
                         custPNum = details[1].split(": ")[1]
                         dessert = details[2].split(": ")[1]
@@ -102,20 +103,20 @@ class OrderApp:
         self.cust_name_entry = tk.Entry(root)
         self.cust_name_entry.pack(pady=5)
 
-        # Customer Phone Number
+        
         tk.Label(root, text="Customer Phone Number:").pack(pady=5)
         self.cust_phone_entry = tk.Entry(root)
         self.cust_phone_entry.pack(pady=5)
 
-        # Dessert Name
+        
         tk.Label(root, text="Dessert Name:").pack(pady=5)
         self.dessert_entry = tk.Entry(root)
         self.dessert_entry.pack(pady=5)
 
-        # Order Button
+        
         tk.Button(root, text="Place Order", command=self.place_order).pack(pady=20)
 
-        # Display area for order confirmation
+        
         self.order_status = tk.Text(root, height=10, width=50)
         self.order_status.pack(pady=20)
 
@@ -135,10 +136,10 @@ class OrderApp:
             
 
 
-        # Create the Order object
+        #Create the Order object
         new_order = Order(cust_name, cust_phone, dessert)
         
-        # Display order confirmation
+        #Display order confirmation
         self.order_status.delete(1.0, tk.END)
         self.order_status.insert(tk.END, f"Order placed successfully!\nOrder Number: {new_order.orderNum}\nCustomer: {cust_name}\nDessert: {dessert}\nStatus: {new_order.status}\n")
         Order.save_orders()
