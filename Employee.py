@@ -152,7 +152,137 @@ class Employee:
         Employee(5, "Johnathon Bennet", "Cashier", "employee5", "password5", "123-456-7892", "johnathon@example.com", 20.00)
         Employee(6, "Dominic Adams", "Cashier", "employee6", "password6", "123-456-7893", "dominic@example.com", 20.00)
 
+class EmployeeMng:
+        
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Employee Management System")
 
+        self.display_button = tk.Button(root, text="Generate Employee Report", command=self.display_employees)
+        self.display_button.pack(pady=10)
+
+        # Add Employee button
+        self.add_employee_button = tk.Button(root, text="Add Employee", command=self.add_employee)
+        self.add_employee_button.pack(pady=10)
+
+        # Update Employee button
+        self.update_employee_button = tk.Button(root, text="Update Employee", command=self.update_employee)
+        self.update_employee_button.pack(pady=10)
+
+    def display_employees(self):
+        # Create a new window for displaying employees
+        display_window = tk.Toplevel(self.root)
+        display_window.title("Employee List")
+
+        # Create a ScrolledText widget for displaying the employee list
+        employee_info = Employee.display_employees()
+
+        employee_display = ScrolledText(display_window, width=60, height=20)
+        employee_display.pack(pady=10)
+
+        employee_display.insert(tk.END, employee_info)
+        employee_display.config(state=tk.DISABLED)  # Make it read-only
+
+    def add_employee(self):
+        # Open a new window to add employee details
+        add_window = tk.Toplevel(self.root)
+        add_window.title("Add Employee")
+
+        # Input fields for new employee details
+        tk.Label(add_window, text="Employee ID:").pack(pady=5)
+        id_entry = tk.Entry(add_window)
+        id_entry.pack(pady=5)
+
+        tk.Label(add_window, text="Name:").pack(pady=5)
+        name_entry = tk.Entry(add_window)
+        name_entry.pack(pady=5)
+
+        tk.Label(add_window, text="Position:").pack(pady=5)
+        position_entry = tk.Entry(add_window)
+        position_entry.pack(pady=5)
+
+        tk.Label(add_window, text="Username:").pack(pady=5)
+        username_entry = tk.Entry(add_window)
+        username_entry.pack(pady=5)
+
+        tk.Label(add_window, text="Password:").pack(pady=5)
+        password_entry = tk.Entry(add_window)
+        password_entry.pack(pady=5)
+
+        tk.Label(add_window, text="Phone:").pack(pady=5)
+        phone_entry = tk.Entry(add_window)
+        phone_entry.pack(pady=5)
+
+        tk.Label(add_window, text="Email:").pack(pady=5)
+        email_entry = tk.Entry(add_window)
+        email_entry.pack(pady=5)
+
+        tk.Label(add_window, text="Pay Rate:").pack(pady=5)
+        payrate_entry = tk.Entry(add_window)
+        payrate_entry.pack(pady=5)
+
+        def save_employee():
+            employee_id = int(id_entry.get())
+            name = name_entry.get()
+            position = position_entry.get()
+            username = username_entry.get()
+            password = password_entry.get()
+            phone = phone_entry.get()
+            email = email_entry.get()
+            payrate = float(payrate_entry.get())
+
+            response = Employee.add_employee(employee_id, name, position, username, password, phone, email, payrate)
+            messagebox.showinfo("Add Employee", response)
+            add_window.destroy()  # Close the add employee window
+
+        # Add employee button
+        tk.Button(add_window, text="Save Employee", command=save_employee).pack(pady=10)
+
+    def update_employee(self):
+        # Open a new window to update employee details
+        update_window = tk.Toplevel(self.root)
+        update_window.title("Update Employee")
+
+        # Input field for employee ID
+        tk.Label(update_window, text="Employee ID:").pack(pady=5)
+        id_entry = tk.Entry(update_window)
+        id_entry.pack(pady=5)
+
+        # Input fields for new employee details
+        tk.Label(update_window, text="New Phone (optional):").pack(pady=5)
+        phone_entry = tk.Entry(update_window)
+        phone_entry.pack(pady=5)
+
+        tk.Label(update_window, text="New Email (optional):").pack(pady=5)
+        email_entry = tk.Entry(update_window)
+        email_entry.pack(pady=5)
+
+        tk.Label(update_window, text="New Position (optional):").pack(pady=5)
+        position_entry = tk.Entry(update_window)
+        position_entry.pack(pady=5)
+
+        tk.Label(update_window, text="New Pay Rate (optional):").pack(pady=5)
+        payrate_entry = tk.Entry(update_window)
+        payrate_entry.pack(pady=5)
+
+        tk.Label(update_window, text="New Status (optional):").pack(pady=5)
+        status_entry = tk.Entry(update_window)
+        status_entry.pack(pady=5)
+
+        def update_employee_details():
+            employee_id = int(id_entry.get())
+            phone = phone_entry.get() or None
+            email = email_entry.get() or None
+            position = position_entry.get() or None
+            payrate = float(payrate_entry.get()) if payrate_entry.get() else None
+            status = status_entry.get() or None
+
+            response = Employee.update_employee_contact(employee_id, phone, email, position, payrate, status)
+            messagebox.showinfo("Update Employee", response)
+            update_window.destroy()  # Close the update window
+
+        # Update employee button
+        tk.Button(update_window, text="Update Employee", command=update_employee_details).pack(pady=10)
 # GUI Setup with Tkinter
 class EmployeeApp:
     def __init__(self, root):
@@ -181,17 +311,9 @@ class EmployeeApp:
         self.attendance_button = tk.Button(root, text="View Attendance", command=self.view_attendance)
         self.attendance_button.pack(pady=10)
 
-        self.display_button = tk.Button(root, text="Display Employees", command=self.display_employees)
-        self.display_button.pack(pady=10)
+        
 
-        # Add Employee button
-        self.add_employee_button = tk.Button(root, text="Add Employee", command=self.add_employee)
-        self.add_employee_button.pack(pady=10)
-
-        # Update Employee button
-        self.update_employee_button = tk.Button(root, text="Update Employee", command=self.update_employee)
-        self.update_employee_button.pack(pady=10)
-
+        
         self.place_order_button = tk.Button(root, text="Place Customer Order", command=self.place_order)
         self.place_order_button.pack(pady=10)
 

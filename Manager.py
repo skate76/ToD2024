@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox
 from Employee import EmployeeApp
+from Employee import EmployeeMng
 from Recipe import Recipe
 from Recipe import RecipeApp
 from Employee import Employee
@@ -13,8 +14,8 @@ class Manager:
         self.inventory = Inventory.inventorylst
         self.employee_list = Employee.employee_list
         
-        self.window = tk.Tk()
-        self.window.title("Manager Dashboard")
+        #self.window = tk.Tk()
+        #self.window.title("Manager Dashboard")
         
         #buttons!
         self.create_buttons()
@@ -33,8 +34,7 @@ class Manager:
         self.manage_staff_button = tk.Button(self.window, text="Manage Staff", command=self.manage_staff)
         self.manage_staff_button.pack(pady=10)
 
-        self.manage_recipe_button = tk.Button(self.window, text="Manage Recipes", command=self.manage_recipe)
-        self.manage_recipe_button.pack(pady=10)
+        
 
 
 
@@ -120,7 +120,7 @@ class Manager:
         Employee.load_employees()
         
         root = tk.Tk()
-        EmployeeApp(root)
+        EmployeeMng(root)
         # Staff management window
         #self.new_window("Manage Staff", [
             #("Display All Staff", self.display_all_staff),
